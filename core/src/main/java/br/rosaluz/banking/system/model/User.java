@@ -3,7 +3,7 @@ package br.rosaluz.banking.system.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="USER")
+@Table(name="USERS")
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
