@@ -7,12 +7,15 @@ import br.rosaluz.banking.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 
 @RestController
@@ -25,18 +28,19 @@ public class UserController {
 
 
     public UserController(UserService userService, ConversionService conversionService) {
+
         this.userService = userService;
         this.conversionService = conversionService;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UserResponseDto> create(@RequestBody @Valid UserDTO userDTO){
+    public ResponseEntity<UserResponseDto> create(@RequestBody @Valid UserDTO userDTO, UriComponentsBuilder uriBuider)
+    {
+        //TODO Validar se login já existe
+         User user = userService.saveUser(userDTO.convertToUser());
 
-         User user = userService.saveUser(conversionService.convert(userDTO, User.class));
-
-        return ResponseEntity.ok(conversionService.convert(user,UserResponseDto.class));
-
-
+        URI uri = uriBuider.path("/user/{id}").buildAndExpand(user.getId()).toUri();
+        return ResponseEntity.created(uri).body(new UserResponseDto(user));
 
     }
 }

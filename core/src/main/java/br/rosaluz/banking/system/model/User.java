@@ -1,6 +1,7 @@
 package br.rosaluz.banking.system.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="USERS")
@@ -8,8 +9,19 @@ public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
-    private String userName;
-    private String  userPassword;
+    @NotNull
+    private  String name;
+    @NotNull
+    private  String login;
+    @NotNull
+    private String  password;
+
+
+    public User(String name, String login, String password) {
+        this.name = name;
+        this.login = login;
+        this.password = password;
+    }
 
     public long getId() {
         return id;
@@ -19,19 +31,28 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setLogin(String login) {
+        this.login = login;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
