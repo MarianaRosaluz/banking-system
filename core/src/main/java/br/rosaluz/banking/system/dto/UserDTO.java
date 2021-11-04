@@ -1,13 +1,22 @@
 package br.rosaluz.banking.system.dto;
 
 import br.rosaluz.banking.system.model.User;
-import br.rosaluz.banking.system.service.utils.Encrypt;
 
 public class UserDTO {
 
     private  String name;
     private  String  login;
+
+    public String getPassword() {
+        return password;
+    }
+
     private String  password;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
 
     public UserDTO(String name, String login, String password) {
         this.name = name;
@@ -16,7 +25,6 @@ public class UserDTO {
     }
 
     public User convertToUser(){
-        String convert = Encrypt.base64encode(password);
-        return  new User(name,login, Encrypt.base64encode(password));
+        return  new User(name,login, password);
     }
 }
