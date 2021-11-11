@@ -1,9 +1,6 @@
 package br.rosaluz.banking.system.controller;
 
-import br.rosaluz.banking.system.dto.LoginDTO;
-import br.rosaluz.banking.system.dto.TokenDto;
-import br.rosaluz.banking.system.dto.UserDTO;
-import br.rosaluz.banking.system.dto.UserResponseDto;
+import br.rosaluz.banking.system.dto.*;
 import br.rosaluz.banking.system.model.User;
 import br.rosaluz.banking.system.service.TokenService;
 import br.rosaluz.banking.system.service.UserService;
@@ -14,10 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -45,17 +39,23 @@ public class UserController {
         this.userService = userService;
         this.tokenService = tokenService;
     }
-
-    @PostMapping("/create")
-    public ResponseEntity<UserResponseDto> create(@RequestBody @Valid UserDTO userDTO, UriComponentsBuilder uriBuider)
+    @GetMapping("/checkAvailableSigninName")
+    public ResponseEntity<?> checkAvailableSigninName(@RequestBody @Valid SingInName singInName)
     {
-        //TODO Validar se login já existe
+        boolean valid = userService.validateLoginAlredyExist(singInName);
+        return ResponseEntity.ok(new UserResponseDto(valid));
+
+    }
+    @PostMapping("/create")
+    public ResponseEntity<?> create(@RequestBody @Valid UserDTO userDTO, UriComponentsBuilder uriBuider)
+    {
+
         //TODO MUDAR FORMA DE CODIFICAR
          userDTO.setPassword(encoder.encode(userDTO.getPassword()));
          User user = userService.saveUser(userDTO.convertToUser());
 
         URI uri = uriBuider.path("/user/{id}").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(new UserResponseDto(user));
+        return ResponseEntity.created(uri).build();
 
     }
 

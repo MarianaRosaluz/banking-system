@@ -1,5 +1,6 @@
 package br.rosaluz.banking.system.service;
 
+import br.rosaluz.banking.system.dto.SingInName;
 import br.rosaluz.banking.system.model.User;
 import br.rosaluz.banking.system.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,15 @@ public class UserServiceImpl implements  UserService {
     @Override
     public Optional<User> findById(Long id){
         return  userRepository.findById(id);
+    }
+
+    @Override
+    public  boolean validateLoginAlredyExist(SingInName login){
+
+        if(findByLogin(login.singInName).isPresent())
+            return false;
+        else
+            return true;
     }
 
 

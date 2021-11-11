@@ -5,13 +5,20 @@ import br.rosaluz.banking.system.model.User;
 public class UserDTO {
 
     private  String name;
-    private  String  login;
 
+
+
+    private  String  login;
+    private String  password;
+
+    public String getLogin() {
+        return login;
+    }
     public String getPassword() {
         return password;
     }
 
-    private String  password;
+
     public void setPassword(String password) {
         this.password = password;
     }

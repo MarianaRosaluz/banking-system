@@ -15,10 +15,11 @@ public class User implements UserDetails {
     private Long id;
     @NotNull
     private  String name;
-    @NotNull
+    @NotNull @Column(unique=true)
     private  String login;
     @NotNull
     private String  password;
+
 
     public User(){
 
