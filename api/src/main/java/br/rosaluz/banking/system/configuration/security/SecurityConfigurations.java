@@ -53,9 +53,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/api/banking/system/user/create").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/banking/system/user/auth").permitAll()
-                .antMatchers(HttpMethod.GET,"/api/banking/system/user/checkAvailableSigninName").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/banking/system/singup/create").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/banking/system/login/auth").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/banking/system/singup/checkAvailableSigninName").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
