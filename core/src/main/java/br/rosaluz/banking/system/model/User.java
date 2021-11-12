@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name="USERS")
@@ -16,16 +17,26 @@ public class User implements UserDetails {
     @NotNull
     private  String name;
     @NotNull @Column(unique=true)
+    private String document;
+    @NotNull
+    private Date birthDate;
+    private String motherName;
+    @NotNull @Column(unique=true)
     private  String login;
     @NotNull
     private String  password;
+    @OneToOne
+    private Account account;
 
 
     public User(){
 
     }
-    public User(String name, String login, String password) {
+    public User(String name, String document, Date birthDate, String motherName, String login, String password){
         this.name = name;
+        this.document = document;
+        this.birthDate = birthDate;
+        this.motherName = motherName;
         this.login = login;
         this.password = password;
     }

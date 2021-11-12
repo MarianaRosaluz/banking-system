@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/banking/system/login", produces="application/json")
-public class LoginController {
+public class UserController {
 
 
     @Autowired
@@ -27,7 +27,7 @@ public class LoginController {
     @Autowired
     private AuthenticationManager authManager;
 
-    public LoginController(TokenService tokenService, AuthenticationManager authManager) {
+    public UserController(TokenService tokenService, AuthenticationManager authManager) {
         this.tokenService = tokenService;
         this.authManager = authManager;
     }
