@@ -6,4 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/api/banking/system/transfer", produces="application/json")
 public class TransferController {
+
+
 }

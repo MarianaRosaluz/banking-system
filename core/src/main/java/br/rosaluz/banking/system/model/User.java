@@ -25,6 +25,9 @@ public class User implements UserDetails {
     private  String login;
     @NotNull
     private String  password;
+
+
+
     @OneToOne
     private Account account;
 
@@ -93,6 +96,15 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
 
 
     @Override

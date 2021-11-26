@@ -16,6 +16,7 @@ public class Account {
     @NotNull
     private  Long accountDigit;
 
+
     public Account(Long agencyCode, Long accountNumber, Long accountDigit) {
         this.agencyCode = agencyCode;
         this.accountNumber = accountNumber;

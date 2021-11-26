@@ -1,7 +1,9 @@
 package br.rosaluz.banking.system.controller;
 
 import br.rosaluz.banking.system.dto.*;
+import br.rosaluz.banking.system.model.Account;
 import br.rosaluz.banking.system.model.User;
+import br.rosaluz.banking.system.service.AccountService;
 import br.rosaluz.banking.system.service.TokenService;
 import br.rosaluz.banking.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,13 @@ public class AccountController {
     private UserService userService;
     @Autowired
     private  PasswordEncoder encoder;
+    @Autowired
+    private AccountService accountService;
 
 
-    public AccountController(UserService userService, PasswordEncoder encoder) {
+    public AccountController(UserService userService, PasswordEncoder encoder, AccountService accountService) {
 
+        this.accountService = accountService;
         this.encoder = encoder;
         this.userService = userService;
     }
@@ -45,9 +50,12 @@ public class AccountController {
     public ResponseEntity<?> create(@RequestBody @Valid UserDTO userDTO, UriComponentsBuilder uriBuider)
     {
 
-        //TODO MUDAR FORMA DE CODIFICAR
+         Account account = accountService.generateAccount();
+
          userDTO.setPassword(encoder.encode(userDTO.getPassword()));
-         User user = userService.saveUser(userDTO.convertToUser());
+         User user = userDTO.convertToUser();
+         user.setAccount(account);
+         userService.saveUser(user);
 
         URI uri = uriBuider.path("/user/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).build();
