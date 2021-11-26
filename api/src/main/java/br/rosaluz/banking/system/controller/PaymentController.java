@@ -6,4 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/api/banking/system/payment", produces="application/json")
 public class PaymentController {
+
+    //TODO FAZER PAGAMENTO DE UM BOLETO
 }
