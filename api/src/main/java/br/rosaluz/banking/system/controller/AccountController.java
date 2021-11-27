@@ -6,6 +6,7 @@ import br.rosaluz.banking.system.model.User;
 import br.rosaluz.banking.system.service.AccountService;
 import br.rosaluz.banking.system.service.TokenService;
 import br.rosaluz.banking.system.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,9 +20,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/banking/system/singup", produces="application/json")
+@Api(value="API REST Banking System")
 public class AccountController {
 
     @Autowired
