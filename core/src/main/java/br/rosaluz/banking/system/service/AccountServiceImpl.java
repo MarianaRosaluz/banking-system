@@ -3,10 +3,12 @@ package br.rosaluz.banking.system.service;
 import br.rosaluz.banking.system.model.Account;
 import br.rosaluz.banking.system.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Random;
 
+@Service
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
@@ -18,14 +20,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account saveUser(Account account){
+    public Account save(Account account){
         return  accountRepository.save(account);
     }
 
     @Override
     public Account generateAccount(){
-        Account account = new Account((long) 0001, generateAccountNumber(),generateAccountNumber());
-        saveUser(account);
+        Account account = new Account((long) 0001, generateAccountNumber(),generateAccountNumber(),0);
+        save(account);
         return  account;
     }
     @Override

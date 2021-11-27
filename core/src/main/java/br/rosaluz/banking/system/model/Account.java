@@ -20,6 +20,14 @@ public class Account {
 
     public Account(){}
 
+    public Account(Long id,Long agencyCode, Long accountNumber, Long accountDigit,double balance) {
+        this.id = id;
+        this.agencyCode = agencyCode;
+        this.accountNumber = accountNumber;
+        this.accountDigit = accountDigit;
+        this.balance = balance;
+    }
+
     public Account(Long agencyCode, Long accountNumber, Long accountDigit,double balance) {
         this.agencyCode = agencyCode;
         this.accountNumber = accountNumber;

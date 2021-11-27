@@ -53,8 +53,7 @@ public class AccountController {
          Account account = accountService.generateAccount();
 
          userDTO.setPassword(encoder.encode(userDTO.getPassword()));
-         User user = userDTO.convertToUser();
-         user.setAccount(account);
+         User user = userDTO.convertToUser(account);
          userService.saveUser(user);
 
         URI uri = uriBuider.path("/user/{id}").buildAndExpand(user.getId()).toUri();

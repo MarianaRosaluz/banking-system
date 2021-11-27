@@ -35,13 +35,14 @@ public class User implements UserDetails {
     public User(){
 
     }
-    public User(String name, String document, Date birthDate, String motherName, String login, String password){
+    public User(String name, String document, Date birthDate, String motherName, String login, String password, Account account){
         this.name = name;
         this.document = document;
         this.birthDate = birthDate;
         this.motherName = motherName;
         this.login = login;
         this.password = password;
+        this.account = account;
     }
 
     @Override

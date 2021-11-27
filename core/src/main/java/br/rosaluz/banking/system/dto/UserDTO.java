@@ -1,5 +1,6 @@
 package br.rosaluz.banking.system.dto;
 
+import br.rosaluz.banking.system.model.Account;
 import br.rosaluz.banking.system.model.User;
 
 import java.util.Date;
@@ -33,7 +34,7 @@ public class UserDTO {
         this.password = password;
     }
 
-    public User convertToUser(){
-        return  new User(name,document,birthDate, motherName, login,password);
+    public User convertToUser(Account account){
+        return  new User(name,document,birthDate, motherName, login,password,account);
     }
 }
