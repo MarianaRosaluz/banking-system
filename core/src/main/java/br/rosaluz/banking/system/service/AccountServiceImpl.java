@@ -4,6 +4,7 @@ import br.rosaluz.banking.system.model.Account;
 import br.rosaluz.banking.system.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
 import java.util.Random;
 
 public class AccountServiceImpl implements AccountService {
@@ -26,6 +27,10 @@ public class AccountServiceImpl implements AccountService {
         Account account = new Account((long) 0001, generateAccountNumber(),generateAccountNumber());
         saveUser(account);
         return  account;
+    }
+    @Override
+    public Optional<Account> findByaccountNumber(Long accountNumber){
+        return accountRepository.findByaccountNumber(accountNumber);
     }
 
     private Long generateAccountNumber(){
