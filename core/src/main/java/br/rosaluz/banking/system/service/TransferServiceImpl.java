@@ -2,6 +2,8 @@ package br.rosaluz.banking.system.service;
 
 import br.rosaluz.banking.system.dto.TransferDTO;
 import br.rosaluz.banking.system.model.Account;
+import br.rosaluz.banking.system.model.Transfer;
+import br.rosaluz.banking.system.repository.TransferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
@@ -10,9 +12,12 @@ public class TransferServiceImpl implements TransferService{
 
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private TransferRepository transferRepository;
 
-    public TransferServiceImpl(AccountService accountService) {
+    public TransferServiceImpl(AccountService accountService, TransferRepository transferRepository) {
         this.accountService = accountService;
+        this.transferRepository = transferRepository;
     }
 
     @Override
@@ -25,6 +30,11 @@ public class TransferServiceImpl implements TransferService{
         }
 
     }
+    @Override
+    public Transfer save(Transfer transfer){
+        return  transferRepository.save(transfer);
+    }
+
     public boolean ValidateAccount(TransferDTO transferDTO){
 
         if(accountService.findByaccountNumber(transferDTO.accountOrigin).isPresent() &&

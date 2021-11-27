@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class payments {
+public class Payments {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -22,7 +22,7 @@ public class payments {
     @NotNull
     private String accountDestination;
 
-    public payments(String accountPayment, String bankDestination, Long value, String nameDestination, String accountDestination) {
+    public Payments(String accountPayment, String bankDestination, Long value, String nameDestination, String accountDestination) {
         this.accountPayment = accountPayment;
         this.bankDestination = bankDestination;
         this.value = value;

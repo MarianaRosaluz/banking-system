@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class transfer {
+public class Transfer {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -17,11 +17,11 @@ public class transfer {
     @NotNull
     private Long accountDestination;
     @NotNull
-    private long value;
+    private Double value;
     @NotNull
     private String type;
 
-    public transfer(Long accountOrigin, Long accountDestination, long value, String type) {
+    public Transfer(Long accountOrigin, Long accountDestination, Double value, String type) {
         this.accountOrigin = accountOrigin;
         this.accountDestination = accountDestination;
         this.value = value;
