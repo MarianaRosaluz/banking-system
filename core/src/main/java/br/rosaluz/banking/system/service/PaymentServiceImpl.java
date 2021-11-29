@@ -8,9 +8,10 @@ import br.rosaluz.banking.system.model.Payment;
 import br.rosaluz.banking.system.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.SpringVersion;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class PaymentServiceImpl implements  PaymentService{
 
     @Autowired

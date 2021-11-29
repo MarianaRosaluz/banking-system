@@ -10,8 +10,7 @@ public class Payment {
     private Long id;
     @NotNull
     private Long accountPayment;
-    @NotNull
-    @OneToMany
+    @ManyToOne
     private Institution institution;
     @NotNull
     private Long value;

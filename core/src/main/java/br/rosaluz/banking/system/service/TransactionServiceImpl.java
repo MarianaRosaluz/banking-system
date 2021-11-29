@@ -4,10 +4,12 @@ import br.rosaluz.banking.system.model.Account;
 import br.rosaluz.banking.system.model.Transaction;
 import br.rosaluz.banking.system.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TransactionServiceImpl implements TransactionService{
 
 

@@ -3,9 +3,11 @@ package br.rosaluz.banking.system.service;
 import br.rosaluz.banking.system.model.Bank;
 import br.rosaluz.banking.system.model.Institution;
 import br.rosaluz.banking.system.repository.InstitutionRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class InstitutionServiceImpl implements  InstitutionService{
 
 

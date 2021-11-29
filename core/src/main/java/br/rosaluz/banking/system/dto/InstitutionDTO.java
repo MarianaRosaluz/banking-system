@@ -27,7 +27,7 @@ public class InstitutionDTO {
 
     public Institution convertInstitutionDtoToIntitution(Bank bank){
 
-        return new Institution(name,bank);
+        return new Institution(name,bank.getId());
 
     }
 

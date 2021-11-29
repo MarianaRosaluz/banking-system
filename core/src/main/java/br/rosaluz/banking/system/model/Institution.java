@@ -1,11 +1,9 @@
 package br.rosaluz.banking.system.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Entity
 public class Institution {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -13,13 +11,12 @@ public class Institution {
     @NotNull
     private String name;
     @NotNull
-    @OneToMany
-    private Bank bank;
+    private Long bankId;
 
 
-    public Institution(String name, Bank bank) {
+    public Institution(String name, Long bankId) {
         this.name = name;
-        this.bank = bank;
+        this.bankId = bankId;
     }
 
     public Long getId() {
@@ -38,12 +35,12 @@ public class Institution {
         this.name = name;
     }
 
-    public Bank getBank() {
-        return bank;
+    public Long getBankId() {
+        return bankId;
     }
 
-    public void setBank(Bank bank) {
-        this.bank = bank;
+    public void setBank(Long bankId) {
+        this.bankId = bankId;
     }
 
 }
