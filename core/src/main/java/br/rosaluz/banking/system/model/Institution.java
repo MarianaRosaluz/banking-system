@@ -8,6 +8,10 @@ public class Institution {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+
+    public Institution() {
+    }
+
     @NotNull
     private String name;
     @NotNull

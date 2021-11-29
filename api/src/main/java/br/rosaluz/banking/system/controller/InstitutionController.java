@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/api/banking/system/Institution", produces="application/json")
+@RequestMapping(value = "/api/banking/system/institution", produces="application/json")
 @Api(value="API REST Banking System")
 public class InstitutionController {
 

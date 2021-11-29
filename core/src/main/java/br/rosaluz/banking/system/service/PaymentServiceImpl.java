@@ -5,6 +5,7 @@ import br.rosaluz.banking.system.dto.TransferDTO;
 import br.rosaluz.banking.system.model.Account;
 import br.rosaluz.banking.system.model.Institution;
 import br.rosaluz.banking.system.model.Payment;
+import br.rosaluz.banking.system.model.Transaction;
 import br.rosaluz.banking.system.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.SpringVersion;
@@ -22,11 +23,15 @@ public class PaymentServiceImpl implements  PaymentService{
     @Autowired
     private  AccountService accountService;
 
-    public PaymentServiceImpl(PaymentRepository paymentRepository,InstitutionService institutionService, AccountService accountService) {
+    @Autowired
+    private TransactionService transactionService;
+
+    public PaymentServiceImpl(PaymentRepository paymentRepository,InstitutionService institutionService, AccountService accountService,TransactionService transactionService) {
 
         this.accountService = accountService;
         this.institutionService = institutionService;
         this.paymentRepository = paymentRepository;
+        this.transactionService = transactionService;
     }
 
     @Override
@@ -61,6 +66,7 @@ public class PaymentServiceImpl implements  PaymentService{
             accountService.save(account);
             Payment payment = paymentDTO.convertPaymentDtoToPayment(institutionService.findById(paymentDTO.getInstitutionId()).get());
             save(payment);
+            transactionService.save(new Transaction("transfer","Debit", payment.getValue(),payment.getAccountPayment()));
             return  true;
         }
         else

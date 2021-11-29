@@ -56,7 +56,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/api/banking/system/singup/create").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/banking/system/login/auth").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/banking/system/singup/checkAvailableSigninName").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/banking/system/transfer/makeTransfer").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

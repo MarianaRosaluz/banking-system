@@ -11,7 +11,7 @@ public class PaymentDTO {
     private Long institutionId;
 
 
-    private Long value;
+    private Double value;
 
     public Long getAccountPayment() {
         return accountPayment;
@@ -29,11 +29,11 @@ public class PaymentDTO {
         this.institutionId = institutionId;
     }
 
-    public Long getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(Long value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
@@ -57,7 +57,7 @@ public class PaymentDTO {
 
     private String accountDestination;
 
-    public PaymentDTO(Long accountPayment, Long institutionId, Long value, String nameDestination, String accountDestination) {
+    public PaymentDTO(Long accountPayment, Long institutionId, Double value, String nameDestination, String accountDestination) {
         this.accountPayment = accountPayment;
         this.institutionId = institutionId;
         this.value = value;

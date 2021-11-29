@@ -3,8 +3,10 @@ package br.rosaluz.banking.system.service;
 import br.rosaluz.banking.system.dto.TransferDTO;
 import br.rosaluz.banking.system.model.Account;
 import br.rosaluz.banking.system.model.Payment;
+import br.rosaluz.banking.system.model.Transaction;
 import br.rosaluz.banking.system.model.Transfer;
 import br.rosaluz.banking.system.repository.TransferRepository;
+import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +20,13 @@ public class TransferServiceImpl implements TransferService{
     @Autowired
     private TransferRepository transferRepository;
 
-    public TransferServiceImpl(AccountService accountService, TransferRepository transferRepository) {
+    @Autowired
+    private TransactionService transactionService;
+
+    public TransferServiceImpl(AccountService accountService, TransferRepository transferRepository, TransactionService transactionService) {
         this.accountService = accountService;
         this.transferRepository = transferRepository;
+        this.transactionService = transactionService;
     }
 
     @Override
@@ -36,7 +42,7 @@ public class TransferServiceImpl implements TransferService{
             accountService.save(accountOrigin);
 
             Double OldBalance = accountService.getBalance(transferDTO.accountDestination);
-            Double NewBalance = OldBalance - transferDTO.value;
+            Double NewBalance = OldBalance + transferDTO.value;
             Optional <Account> accountOptional = accountService.findByaccountNumber(transferDTO.accountDestination);
             Account accountDestination = accountOptional.get();
             accountDestination.setBalance(NewBalance);
@@ -46,6 +52,8 @@ public class TransferServiceImpl implements TransferService{
 
             Transfer transfer = transferDTO.convertToTransfer();
             save(transfer);
+            transactionService.save(new Transaction("transfer","Debit", transfer.getValue(),transfer.getAccountOrigin()));
+            transactionService.save(new Transaction("transfer","Credit", transfer.getValue(),transfer.getAccountDestination()));
             return  true;
         }
         return  false;

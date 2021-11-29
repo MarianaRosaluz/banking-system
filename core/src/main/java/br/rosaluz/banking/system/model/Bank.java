@@ -13,6 +13,10 @@ public class Bank {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private  Long id;
+
+    public Bank() {
+    }
+
     @NotNull
     private String name;
     @NotNull
