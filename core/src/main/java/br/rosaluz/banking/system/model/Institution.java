@@ -3,22 +3,23 @@ package br.rosaluz.banking.system.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-public class Bank {
-
-
+public class Institution {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private  Long id;
+    private Long id;
     @NotNull
     private String name;
     @NotNull
-    private Long agency;
+    @OneToMany
+    private Bank bank;
 
-    public Bank(String name, Long agency) {
+
+    public Institution(String name, Bank bank) {
         this.name = name;
-        this.agency = agency;
+        this.bank = bank;
     }
 
     public Long getId() {
@@ -37,13 +38,12 @@ public class Bank {
         this.name = name;
     }
 
-    public Long getAgency() {
-        return agency;
+    public Bank getBank() {
+        return bank;
     }
 
-    public void setAgency(Long agency) {
-        this.agency = agency;
+    public void setBank(Bank bank) {
+        this.bank = bank;
     }
-
 
 }

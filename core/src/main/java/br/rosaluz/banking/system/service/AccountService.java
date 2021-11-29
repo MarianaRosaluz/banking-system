@@ -8,4 +8,5 @@ public interface AccountService {
     public Account save(Account account);
     public Account generateAccount();
     public Optional<Account> findByaccountNumber(Long accountNumber);
+    public  Double getBalance(Long accountNumber);
 }

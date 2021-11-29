@@ -1,20 +1,18 @@
 package br.rosaluz.banking.system.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Payments {
+public class Payment {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     @NotNull
-    private String accountPayment;
+    private Long accountPayment;
     @NotNull
-    private String bankDestination;
+    @OneToMany
+    private Institution institution;
     @NotNull
     private Long value;
     @NotNull
@@ -22,9 +20,9 @@ public class Payments {
     @NotNull
     private String accountDestination;
 
-    public Payments(String accountPayment, String bankDestination, Long value, String nameDestination, String accountDestination) {
+    public Payment(Long accountPayment, Institution institution, Long value, String nameDestination, String accountDestination) {
         this.accountPayment = accountPayment;
-        this.bankDestination = bankDestination;
+        this.institution = institution;
         this.value = value;
         this.nameDestination = nameDestination;
         this.accountDestination = accountDestination;

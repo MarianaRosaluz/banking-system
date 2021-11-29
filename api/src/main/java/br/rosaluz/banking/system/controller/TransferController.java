@@ -1,6 +1,7 @@
 package br.rosaluz.banking.system.controller;
 
 import br.rosaluz.banking.system.dto.LoginDTO;
+import br.rosaluz.banking.system.dto.PaymentDTO;
 import br.rosaluz.banking.system.dto.TokenDto;
 import br.rosaluz.banking.system.dto.TransferDTO;
 import br.rosaluz.banking.system.model.Transfer;
@@ -27,15 +28,18 @@ public class TransferController {
 
 
 
-    @PostMapping("/makeTransfer")
-    public ResponseEntity<?> makeTransfer(@RequestBody @Valid TransferDTO transferDTO)
-    {
-            if(transferService.ValidateTransfer(transferDTO)){
-                Transfer transfer = transferDTO.convertToTransfer();
-                transferService.save(transfer);
+    @PostMapping("/maketransfer")
+    public ResponseEntity<TokenDto> makeTransfer(@RequestBody @Valid TransferDTO transferDTO )throws Exception {
+        try {
+            Boolean completed = transferService.makeTransfer(transferDTO);
+            if (completed) {
+
                 return ResponseEntity.ok().build();
-            }else {
-                return  ResponseEntity.badRequest().build();
-            }
+            } else throw new Exception("A transferencia não foi realizada");
+
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 }

@@ -2,6 +2,7 @@ package br.rosaluz.banking.system.service;
 
 import br.rosaluz.banking.system.dto.TransferDTO;
 import br.rosaluz.banking.system.model.Account;
+import br.rosaluz.banking.system.model.Payment;
 import br.rosaluz.banking.system.model.Transfer;
 import br.rosaluz.banking.system.repository.TransferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,34 @@ public class TransferServiceImpl implements TransferService{
     }
 
     @Override
+    public  boolean makeTransfer(TransferDTO transferDTO){
+
+        if (ValidateTransfer(transferDTO)){
+
+            Double OldBalanceOrigin = accountService.getBalance(transferDTO.accountOrigin);
+            Double NewBalanceOrigin = OldBalanceOrigin - transferDTO.value;
+            Optional <Account> accountOptionalOrigin = accountService.findByaccountNumber(transferDTO.accountOrigin);
+            Account accountOrigin = accountOptionalOrigin.get();
+            accountOrigin.setBalance(NewBalanceOrigin);
+            accountService.save(accountOrigin);
+
+            Double OldBalance = accountService.getBalance(transferDTO.accountDestination);
+            Double NewBalance = OldBalance - transferDTO.value;
+            Optional <Account> accountOptional = accountService.findByaccountNumber(transferDTO.accountDestination);
+            Account accountDestination = accountOptional.get();
+            accountDestination.setBalance(NewBalance);
+            accountService.save(accountDestination);
+
+
+
+            Transfer transfer = transferDTO.convertToTransfer();
+            save(transfer);
+            return  true;
+        }
+        return  false;
+
+    }
+
     public boolean ValidateTransfer(TransferDTO transferDTO){
 
         if(ValidateAccount(transferDTO) && ValidateBalance(transferDTO)){

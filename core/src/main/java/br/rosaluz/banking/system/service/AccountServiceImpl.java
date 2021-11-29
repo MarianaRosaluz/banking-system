@@ -39,5 +39,11 @@ public class AccountServiceImpl implements AccountService {
         Random generator = new Random();
         return (long) generator.nextInt(100000);
     }
+    @Override
+    public Double getBalance(Long accountNumber){
 
+        Optional<Account> account = accountRepository.findByaccountNumber(accountNumber);
+
+        return account.get().getBalance();
+    }
 }
