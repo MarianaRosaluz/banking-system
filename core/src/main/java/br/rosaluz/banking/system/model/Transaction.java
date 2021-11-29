@@ -17,12 +17,12 @@ public class Transaction {
     @NotNull
     private  Double value;
     @NotNull
-    private  Account account;
+    private  Long accountNumber;
 
-    public Transaction(String origin, String type, Double value, Account account) {
+    public Transaction(String origin, String type, Double value, Long accountNumber) {
         this.origin = origin;
         this.type = type;
         this.value = value;
-        this.account = account;
+        this.accountNumber = accountNumber;
     }
 }
